@@ -1,0 +1,50 @@
+"kind": "List"
+"apiVersion": "v1"
+"metadata": {}
+"items":
+  - "kind": "DeploymentConfig"
+    "apiVersion": "v1"
+    "metadata":
+        "name": "simpleweb"
+        "creationTimestamp": null
+        "labels":
+          "app": "simpleweb"
+    "spec":
+      "strategy":
+        "resources":
+      "triggers":
+        - "type": "ConfigChange"
+      "replicas": 1
+      "test": false
+      "selector":
+        "app": "simpleweb"
+      "template":
+        "metadata":
+          "creationTimestamp": null
+          "labels":
+            "app": "simpleweb"
+        "spec":
+          "containers":
+            - "name": "simpleweb"
+              "image": "ishentras/simpleweb:latest"
+              "ports":
+                - "containerPort": 8080
+                  "protocol": "TCP"
+    "status":
+  - "kind": "Service"
+    "apiVersion": "v1"
+    "metadata":
+      "name": "simpleweb"
+      "creationTimestamp": null
+      "labels":
+        "app": "simpleweb"
+    "spec":
+      "ports":
+        - "name": "8080-tcp"
+          "protocol": "TCP"
+          "port": 8080
+          "targetPort": 8080
+      "selector":
+        "app": "simpleweb"
+    "status":
+    "loadBalancer":
